@@ -16,11 +16,15 @@
                 <div class="title">{{ card.title }}</div>
                 <div class="subtitle">{{ card.subtitle }}</div>
                 <div class="description">{{ card.description }}</div>
-                <div class="tags">
-                    <div v-for="tag in card.tags" :key="tag" class="tag">{{tag}}</div>
-                </div>
+                <footer class="tags-and-button-wrapper">
+                    <div class="tags">
+                        <div v-for="tag in card.tags" :key="tag" class="tag">{{tag}}</div>
+                    </div>
+                    <!-- <button class="more">Details</button> -->
+                </footer>
             </div>
         </div>
+        <footer></footer>
     </div>
 </template>
 
@@ -35,18 +39,52 @@ import Signature from '@/components/Signature.vue'
 })
 export default class App extends Vue {
 	get cards() {
-		const cards = []
-		for (let i = 0; i < 10; i++) {
-			cards.push({
+		return [
+			{
 				img: '/img/card_picular.png',
 				title: 'Picular',
 				subtitle: '2016 - 2017, Game & Tools Programmer',
 				description:
 					'This is just a simple desciption text that I dont know reallt what it will contain in the end. But the imporant thing is that his text doesnt repeat it self to much becouse that looks reall weird.',
 				tags: ['ios', 'mongodb', 'node', 'vue', 'typescript', 'serverless', 'netlify', 'webpack']
-			})
-		}
-		return cards
+			},
+			{
+				img: '/img/card_toca_life.png',
+				title: 'Toca Life',
+				subtitle: '2016 - 2017, Game & Tools Programmer',
+				description: 'Toca Boca make digital toys that have been downloaded over 150 million times in more than 200 countries. Toca Life is their most popular product so far.',
+				tags: ['unity', 'c#', 'c', 'ios', 'android', 'objective-c', 'node']
+			},
+			{
+				img: '/img/card_holy_hand_grenade.png',
+				title: 'Holy Hand Grenade',
+				subtitle: '2014, Full Stack Developer',
+				description: 'Multiplayer reaction based tournament game, where everybody compete against at each other asynchronously. We teamed up with a 3D artist to create some cool assets.',
+				tags: ['ios', 'objective-c', 'spritekit', 'mongodb', 'node']
+			},
+			{
+				img: '/img/card_rantebevis.png',
+				title: 'Räntebevis',
+				subtitle: '2016 - 2017, Complete Tech Stack',
+				description: 'Investment tool with portfolio, analytics and news functionality for interest proofs investements backed by KeystoneJS CMS. Built for one of the largest banks in Sweden',
+				tags: ['ios', 'swift', 'objective-c', 'keystone.js', 'node', 'mongodb']
+			},
+			{
+				img: '/img/card_lazer_league.png',
+				title: 'Lazer League',
+				subtitle: '2016 - 2017, Complete Tech Stack',
+				description:
+					'Multiplayer game where up to 4 players battle each other in capture the flag. First version played locally using iPad as the screen and iPhones as game controller. Later rewritten with Unity for online multiplayer support on the Steam platform.',
+				tags: ['unity', 'c#', 'ios', 'objective-c', 'bluetooth']
+			},
+			{
+				img: '/img/card_wars.png',
+				title: 'Wars',
+				subtitle: '2016 - 2017, Complete Tech Stack',
+				description: 'Team based online multiplayer RTS game with unique gameplay style and very large pixels. Started of as an iOS game and later rewritten in Unity with Desktop focus.',
+				tags: ['unity', 'c#', 'ios', 'objective-c', 'node', 'mongodb']
+			}
+		]
 	}
 }
 </script>
@@ -148,6 +186,9 @@ h1 {
 	background-color: $white;
 	padding: 20px;
 	margin-bottom: 40px;
+	display: flex;
+	flex-direction: column;
+	// border: 1px solid red;
 	@include shadow;
 	.picture {
 		width: 100%;
@@ -158,7 +199,7 @@ h1 {
 		@include rounded-corners;
 	}
 	.title {
-		font-size: 8em;
+		font-size: 7em;
 		font-weight: $weight-extra-bold;
 		text-transform: uppercase;
 		margin-top: 12px;
@@ -175,9 +216,21 @@ h1 {
 		font-weight: $weight-semi-bold;
 		margin-top: 20px;
 		line-height: 1.2;
+		// max-height: 50px;
+		// overflow: hidden;
+	}
+	footer {
+		display: flex;
+		width: 100%;
+		// flex-direction: column;
+		// border: 1px solid green;
+		align-items: flex-end;
+		flex: 1;
+		// margin-top: 15px;
 	}
 	.tags {
 		margin-top: 20px;
+		flex: 1;
 	}
 	.tag {
 		font-size: 2.2em;
@@ -190,24 +243,45 @@ h1 {
 		margin-right: 5px;
 		margin-bottom: 5px;
 	}
+	button.more {
+		font-size: 2.2em;
+		font-weight: $weight-bold;
+		border: 2px solid #ddd;
+		height: 50px;
+		background: none;
+		padding: 10px 20px;
+		margin-left: 40px;
+		border-radius: 5px;
+		text-transform: uppercase;
+		&:hover {
+			cursor: pointer;
+			background-color: #eee;
+		}
+	}
+}
+#app > footer {
+	height: 300px;
 }
 // tablet
-@media (min-width: 768px) {
+@media (min-width: 568px) {
 	body {
-		max-width: 700px;
+		max-width: 800px;
+		padding: 0 40px;
 	}
 	header {
-		flex-direction: row;
-		height: 350px;
+		// flex-direction: row;
 		padding: 0;
+		margin-top: 20px;
+		// height: 350px;
 		.picture {
-			height: 230px;
-			width: 230px;
-			margin-right: 50px;
+			// height: 130px;
+			// width: 130px;
+			margin-right: 30px;
 			margin-bottom: 0;
 		}
 		.logo-ish {
-			display: block;
+			// align-items: center;
+			// display: block;
 			width: 350px;
 			.signature {
 				width: 350px;
@@ -234,13 +308,18 @@ h1 {
 		@include rounded-corners;
 	}
 }
+@media (min-width: 768px) {
+	header {
+		flex-direction: row;
+	}
+}
 // desktop
-@media (min-width: 1300px) {
+@media (min-width: 1100px) {
 	body {
-		max-width: 1200px;
+		max-width: 1500px;
 	}
 	header {
-		height: 500px;
+		height: 400px;
 		.picture {
 			height: 270px;
 			width: 270px;
@@ -271,9 +350,13 @@ h1 {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		grid-gap: 40px;
+		// column-count: 2;
+		// column-gap: 40px;
 	}
 	.card {
 		margin-bottom: 0;
+		// display: inline-block;
+		// margin-bottom: 40px;
 	}
 }
 </style>
