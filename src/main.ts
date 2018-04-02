@@ -4,5 +4,10 @@ import App from './App.vue'
 Vue.config.productionTip = false
 
 new Vue({
-  render: h => h(App)
+	data() {
+		return {
+			test: 'okrv'
+		}
+	},
+	render: h => h(App)
 }).$mount('#app')

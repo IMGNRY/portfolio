@@ -11,8 +11,14 @@
             </div>
         </header>
         <div class="cards">
-            <div v-for="card in cards" :key="card.title" class="card">
-                <div class="picture" :style="{ 'background-image': `url(${card.img})`}"></div>
+            <div ref="cards" v-for="card in cards" :key="card.title" class="card">
+                <v-intersect @enter="intersect(card)">
+                    <div class="picture-wrapper">
+                        <transition>
+                            <div v-if="card.ready" class="picture" :style="{ 'background-image': `url(${card.img})`}"></div>
+                        </transition>
+                    </div>
+                </v-intersect>
                 <div class="title">{{ card.title }}</div>
                 <div class="subtitle">{{ card.subtitle }}</div>
                 <div class="description">{{ card.description }}</div>
@@ -22,6 +28,7 @@
                     </div>
                     <!-- <button class="more">Details</button> -->
                 </footer>
+
             </div>
         </div>
         <footer></footer>
@@ -31,15 +38,30 @@
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import Signature from '@/components/Signature.vue'
+import Intersect from 'vue-intersect'
+import { setTimeout } from 'timers'
+
+interface Card {
+	img: string
+	title: string
+	subtitle: string
+	description: string
+	tags: string[]
+	ready?: boolean
+}
 
 @Component({
+	name: 'Poop',
 	components: {
-		'v-signature': Signature
+		'v-signature': Signature,
+		'v-intersect': Intersect
 	}
 })
 export default class App extends Vue {
-	get cards() {
-		return [
+	cards: Card[] = []
+
+	created() {
+		this.cards = [
 			{
 				img: '/img/card_picular.png',
 				title: 'Picular',
@@ -86,6 +108,46 @@ export default class App extends Vue {
 			}
 		]
 	}
+
+	intersect(card: Card) {
+		if (card.ready) {
+			return
+		}
+		// setTimeout(() => {
+		const image = new Image()
+		image.addEventListener('load', () => {
+			card.ready = true
+			const idx = this.cards.findIndex(c => c.title == card.title)
+			Vue.set(this.cards, idx, card)
+		})
+		image.src = card.img
+		// }, 100)
+	}
+	// mounted() {
+	// 	console.log('card refs', this.$refs.cards)
+
+	// 	const observer = new IntersectionObserver(entries => {
+	// 		// console.log('intersection entries:', entries)
+	// 		entries.forEach(entry => {
+	// 			console.log('entry:', entry)
+	// 		})
+	// 	})
+
+	// 	for (const element of Array.from(document.querySelectorAll('.picture'))) {
+	// 		console.log('element:', element)
+
+	// 		observer.observe(element)
+	// 	}
+	// 	// .forEach(element => {
+	// 	// 	observer.observe(element)
+	// 	// })
+
+	// 	// element argument can be a selector string
+	// 	//   for an individual element
+	// 	// var flkty = new Flickity( '.main-carousel', {
+	// 	//   // options
+	// 	// });
+	// }
 }
 </script>
 
@@ -95,8 +157,6 @@ $white: #f5f5f5;
 $black: #121212;
 $gray: #222;
 
-$weight-extra-light: 200;
-$weight-light: 300;
 $weight-regular: 400;
 $weight-semi-bold: 600;
 $weight-bold: 700;
@@ -181,6 +241,17 @@ h1 {
 .cards {
 	margin-top: 40px;
 }
+@keyframes bg-pulsate {
+	0% {
+		background-color: lightgray;
+	}
+	50% {
+		background-color: lighten(lightgrey, 3%);
+	}
+	100% {
+		background-color: lightgray;
+	}
+}
 .card {
 	// height: 600px;
 	background-color: $white;
@@ -190,12 +261,23 @@ h1 {
 	flex-direction: column;
 	// border: 1px solid red;
 	@include shadow;
-	.picture {
+	.picture-wrapper {
 		width: 100%;
 		padding-top: 50%;
 		background-color: lightgray;
-		background-position: center;
-		background-size: cover;
+		animation: 700ms infinite bg-pulsate;
+		position: relative;
+		overflow: hidden;
+		.picture {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			left: 0;
+			top: 0;
+			background-position: center;
+			background-size: cover;
+			@include rounded-corners;
+		}
 		@include rounded-corners;
 	}
 	.title {
@@ -287,14 +369,10 @@ h1 {
 				width: 350px;
 			}
 			.name {
-				font-size: 7em;
-				font-weight: $weight-extra-bold;
 				margin-left: -2px;
 			}
 			.subtitle {
 				font-size: 2.6em;
-				font-weight: $weight-semi-bold;
-				margin-top: 5px;
 				.bold {
 					font-weight: 700;
 					border-bottom: 3px solid;
@@ -329,13 +407,9 @@ h1 {
 			width: 350px;
 			.name {
 				font-size: 8em;
-				font-weight: $weight-extra-bold;
-				margin-left: -2px;
 			}
 			.subtitle {
 				font-size: 3.5em;
-				font-weight: $weight-semi-bold;
-				margin-top: 5px;
 				.bold {
 					font-weight: 700;
 					border-bottom: 3px solid;
@@ -358,5 +432,13 @@ h1 {
 		// display: inline-block;
 		// margin-bottom: 40px;
 	}
+}
+.v-enter-active,
+.v-leave-active {
+	transition: opacity 0.5s ease-in;
+}
+.v-enter,
+.v-leave-to {
+	opacity: 0;
 }
 </style>

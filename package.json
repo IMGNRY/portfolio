@@ -10,6 +10,7 @@
     "vue": "^2.5.13",
     "vue-class-component": "^6.0.0",
     "vue-cli": "^2.9.3",
+    "vue-intersect": "^1.1.2",
     "vue-property-decorator": "^6.0.0"
   },
   "devDependencies": {
