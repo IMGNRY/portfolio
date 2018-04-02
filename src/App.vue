@@ -63,7 +63,7 @@ export default class App extends Vue {
 	created() {
 		this.cards = [
 			{
-				img: '/img/card_picular.png',
+				img: 'http://res.cloudinary.com/picular/f_auto/w_650/portfolio/card_picular.png',
 				title: 'Picular',
 				subtitle: '2016 - 2017, Game & Tools Programmer',
 				description:
@@ -71,28 +71,28 @@ export default class App extends Vue {
 				tags: ['ios', 'mongodb', 'node', 'vue', 'typescript', 'serverless', 'netlify', 'webpack']
 			},
 			{
-				img: '/img/card_toca_life.png',
+				img: 'http://res.cloudinary.com/picular/f_auto/w_650/portfolio/card_toca_life.png',
 				title: 'Toca Life',
 				subtitle: '2016 - 2017, Game & Tools Programmer',
 				description: 'Toca Boca make digital toys that have been downloaded over 150 million times in more than 200 countries. Toca Life is their most popular product so far.',
 				tags: ['unity', 'c#', 'c', 'ios', 'android', 'objective-c', 'node']
 			},
 			{
-				img: '/img/card_holy_hand_grenade.png',
+				img: 'http://res.cloudinary.com/picular/f_auto/w_650/portfolio/card_holy_hand_grenade.png',
 				title: 'Holy Hand Grenade',
 				subtitle: '2014, Full Stack Developer',
 				description: 'Multiplayer reaction based tournament game, where everybody compete against at each other asynchronously. We teamed up with a 3D artist to create some cool assets.',
 				tags: ['ios', 'objective-c', 'spritekit', 'mongodb', 'node']
 			},
 			{
-				img: '/img/card_rantebevis.png',
+				img: 'http://res.cloudinary.com/picular/f_auto/w_650/portfolio/card_rantebevis.png',
 				title: 'Räntebevis',
 				subtitle: '2016 - 2017, Complete Tech Stack',
 				description: 'Investment tool with portfolio, analytics and news functionality for interest proofs investements backed by KeystoneJS CMS. Built for one of the largest banks in Sweden',
 				tags: ['ios', 'swift', 'objective-c', 'keystone.js', 'node', 'mongodb']
 			},
 			{
-				img: '/img/card_lazer_league.png',
+				img: 'http://res.cloudinary.com/picular/f_auto/w_650/portfolio/card_lazer_league.png',
 				title: 'Lazer League',
 				subtitle: '2016 - 2017, Complete Tech Stack',
 				description:
@@ -100,7 +100,7 @@ export default class App extends Vue {
 				tags: ['unity', 'c#', 'ios', 'objective-c', 'bluetooth']
 			},
 			{
-				img: '/img/card_wars.png',
+				img: 'http://res.cloudinary.com/picular/f_auto/w_650/portfolio/card_wars.png',
 				title: 'Wars',
 				subtitle: '2016 - 2017, Complete Tech Stack',
 				description: 'Team based online multiplayer RTS game with unique gameplay style and very large pixels. Started of as an iOS game and later rewritten in Unity with Desktop focus.',
@@ -195,7 +195,7 @@ header {
 	padding-top: 10vw;
 	padding-bottom: 10vw;
 	.picture {
-		background-image: url('/img/face-11.jpg');
+		background-image: url('http://res.cloudinary.com/picular/f_auto/w_310/portfolio/face-11');
 		background-position: 50% calc(50% + 5px);
 		background-size: cover;
 		border-radius: 50%;
