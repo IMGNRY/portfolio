@@ -7,6 +7,8 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@types/flickity": "^2.0.1",
+    "flickity": "^2.1.1",
     "vue": "^2.5.13",
     "vue-class-component": "^6.0.0",
     "vue-cli": "^2.9.3",

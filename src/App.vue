@@ -6,7 +6,7 @@
                 <v-signature/>
                 <h1 class="name">Fille Åström</h1>
                 <h2 class="subtitle">Co-Founder & Developer @
-                    <span class="bold">IMGNRY</span>
+                    <a href="http://imgnry.com">IMGNRY</a>
                 </h2>
             </div>
         </header>
@@ -15,7 +15,7 @@
                 <v-intersect @enter="intersect(card)">
                     <div class="picture-wrapper">
                         <transition>
-                            <div v-if="card.ready" class="picture" :style="{ 'background-image': `url(${card.img})`}"></div>
+                            <div v-if="card.ready" class="picture" :style="{ 'background-image': `url(${urlFromImageId(card.imageIds[0])})`}"></div>
                         </transition>
                     </div>
                 </v-intersect>
@@ -31,125 +31,22 @@
 
             </div>
         </div>
-        <footer></footer>
+        <footer>
+            <p>
+                This site is built using
+                <a href="https://vuejs.org">Vue</a>,
+                <a href="https://www.typescriptlang.org">Typescript</a>,
+                <a href="https://webpack.js.org">Webpack</a>,
+                <a href="https://nodejs.org">Node</a>,
+                <a href="https://www.netlify.com">Netlify</a> &
+                <a href="https://cloudinary.com">Cloudinary</a>. <br />Source available on
+                <a href="https://github.com/IMGNRY/portfolio">IMGNRY/portfolio</a>
+            </p>
+        </footer>
     </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
-import Signature from '@/components/Signature.vue'
-import Intersect from 'vue-intersect'
-import { setTimeout } from 'timers'
-
-interface Card {
-	img: string
-	title: string
-	subtitle: string
-	description: string
-	tags: string[]
-	ready?: boolean
-}
-
-@Component({
-	name: 'Poop',
-	components: {
-		'v-signature': Signature,
-		'v-intersect': Intersect
-	}
-})
-export default class App extends Vue {
-	cards: Card[] = []
-
-	created() {
-		this.cards = [
-			{
-				img: 'http://res.cloudinary.com/picular/f_auto/w_650/portfolio/card_picular.png',
-				title: 'Picular',
-				subtitle: '2016 - 2017, Game & Tools Programmer',
-				description:
-					'This is just a simple desciption text that I dont know reallt what it will contain in the end. But the imporant thing is that his text doesnt repeat it self to much becouse that looks reall weird.',
-				tags: ['ios', 'mongodb', 'node', 'vue', 'typescript', 'serverless', 'netlify', 'webpack']
-			},
-			{
-				img: 'http://res.cloudinary.com/picular/f_auto/w_650/portfolio/card_toca_life.png',
-				title: 'Toca Life',
-				subtitle: '2016 - 2017, Game & Tools Programmer',
-				description: 'Toca Boca make digital toys that have been downloaded over 150 million times in more than 200 countries. Toca Life is their most popular product so far.',
-				tags: ['unity', 'c#', 'c', 'ios', 'android', 'objective-c', 'node']
-			},
-			{
-				img: 'http://res.cloudinary.com/picular/f_auto/w_650/portfolio/card_holy_hand_grenade.png',
-				title: 'Holy Hand Grenade',
-				subtitle: '2014, Full Stack Developer',
-				description: 'Multiplayer reaction based tournament game, where everybody compete against at each other asynchronously. We teamed up with a 3D artist to create some cool assets.',
-				tags: ['ios', 'objective-c', 'spritekit', 'mongodb', 'node']
-			},
-			{
-				img: 'http://res.cloudinary.com/picular/f_auto/w_650/portfolio/card_rantebevis.png',
-				title: 'Räntebevis',
-				subtitle: '2016 - 2017, Complete Tech Stack',
-				description: 'Investment tool with portfolio, analytics and news functionality for interest proofs investements backed by KeystoneJS CMS. Built for one of the largest banks in Sweden',
-				tags: ['ios', 'swift', 'objective-c', 'keystone.js', 'node', 'mongodb']
-			},
-			{
-				img: 'http://res.cloudinary.com/picular/f_auto/w_650/portfolio/card_lazer_league.png',
-				title: 'Lazer League',
-				subtitle: '2016 - 2017, Complete Tech Stack',
-				description:
-					'Multiplayer game where up to 4 players battle each other in capture the flag. First version played locally using iPad as the screen and iPhones as game controller. Later rewritten with Unity for online multiplayer support on the Steam platform.',
-				tags: ['unity', 'c#', 'ios', 'objective-c', 'bluetooth']
-			},
-			{
-				img: 'http://res.cloudinary.com/picular/f_auto/w_650/portfolio/card_wars.png',
-				title: 'Wars',
-				subtitle: '2016 - 2017, Complete Tech Stack',
-				description: 'Team based online multiplayer RTS game with unique gameplay style and very large pixels. Started of as an iOS game and later rewritten in Unity with Desktop focus.',
-				tags: ['unity', 'c#', 'ios', 'objective-c', 'node', 'mongodb']
-			}
-		]
-	}
-
-	intersect(card: Card) {
-		if (card.ready) {
-			return
-		}
-		// setTimeout(() => {
-		const image = new Image()
-		image.addEventListener('load', () => {
-			card.ready = true
-			const idx = this.cards.findIndex(c => c.title == card.title)
-			Vue.set(this.cards, idx, card)
-		})
-		image.src = card.img
-		// }, 100)
-	}
-	// mounted() {
-	// 	console.log('card refs', this.$refs.cards)
-
-	// 	const observer = new IntersectionObserver(entries => {
-	// 		// console.log('intersection entries:', entries)
-	// 		entries.forEach(entry => {
-	// 			console.log('entry:', entry)
-	// 		})
-	// 	})
-
-	// 	for (const element of Array.from(document.querySelectorAll('.picture'))) {
-	// 		console.log('element:', element)
-
-	// 		observer.observe(element)
-	// 	}
-	// 	// .forEach(element => {
-	// 	// 	observer.observe(element)
-	// 	// })
-
-	// 	// element argument can be a selector string
-	// 	//   for an individual element
-	// 	// var flkty = new Flickity( '.main-carousel', {
-	// 	//   // options
-	// 	// });
-	// }
-}
-</script>
+<script lang="ts" src="./App.ts"></script>
 
 <style lang="scss">
 $bg-color: #e3e3e3;
@@ -186,6 +83,15 @@ body {
 	line-height: 1;
 	box-sizing: border-box;
 }
+a {
+	color: $black;
+	font-weight: $weight-bold;
+	border-bottom: 3px solid;
+	text-decoration: none;
+	// &:hover {
+	// 	background-color: lighten($bg-color, 30%);
+	// }
+}
 header {
 	width: 100%;
 	display: flex;
@@ -195,7 +101,7 @@ header {
 	padding-top: 10vw;
 	padding-bottom: 10vw;
 	.picture {
-		background-image: url('http://res.cloudinary.com/picular/f_auto/w_310/portfolio/face-11');
+		background-image: url('http://res.cloudinary.com/picular/f_auto/w_310/portfolio/face-2');
 		background-position: 50% calc(50% + 5px);
 		background-size: cover;
 		border-radius: 50%;
@@ -241,17 +147,17 @@ h1 {
 .cards {
 	margin-top: 40px;
 }
-@keyframes bg-pulsate {
-	0% {
-		background-color: lightgray;
-	}
-	50% {
-		background-color: lighten(lightgrey, 3%);
-	}
-	100% {
-		background-color: lightgray;
-	}
-}
+// @keyframes bg-pulsate {
+// 	0% {
+// 		// background-color: lightgray;
+// 	}
+// 	50% {
+// 		background-color: lighten(lightgrey, 3%);
+// 	}
+// 	100% {
+// 		// background-color: lightgray;
+// 	}
+// }
 .card {
 	// height: 600px;
 	background-color: $white;
@@ -265,9 +171,18 @@ h1 {
 		width: 100%;
 		padding-top: 50%;
 		background-color: lightgray;
-		animation: 700ms infinite bg-pulsate;
+		// will-change: background-color;
+		// animation: 700ms infinite bg-pulsate;
+		// animation-iteration-count: 20
 		position: relative;
 		overflow: hidden;
+		.flickity {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			left: 0;
+			top: 0;
+		}
 		.picture {
 			position: absolute;
 			width: 100%;
@@ -342,7 +257,16 @@ h1 {
 	}
 }
 #app > footer {
-	height: 300px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 3em;
+	line-height: 1.8em;
+	text-align: center;
+	padding: 30px 30px 60px 30px;
+	br {
+		display: none;
+	}
 }
 // tablet
 @media (min-width: 568px) {
@@ -390,6 +314,10 @@ h1 {
 	header {
 		flex-direction: row;
 	}
+	#app > footer {
+		font-size: 4em;
+		// padding: 60px;
+	}
 }
 // desktop
 @media (min-width: 1100px) {
@@ -431,6 +359,14 @@ h1 {
 		margin-bottom: 0;
 		// display: inline-block;
 		// margin-bottom: 40px;
+	}
+	#app > footer {
+		padding: 60px;
+		// #app > footer {
+		br {
+			display: initial;
+		}
+		// }
 	}
 }
 .v-enter-active,
