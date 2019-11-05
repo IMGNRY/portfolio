@@ -39,8 +39,7 @@
                 This site is built using
                 <a href="https://vuejs.org">Vue</a>, <a href="https://www.typescriptlang.org">Typescript</a>,
                 <a href="https://webpack.js.org">Webpack</a>, <a href="https://nodejs.org">Node</a>,
-                <a href="https://www.netlify.com">Netlify</a> & <a href="https://cloudinary.com">Cloudinary</a>.
-                <br />Source available on
+                <a href="https://www.netlify.com">Netlify</a>. <br />Source available on
                 <a href="https://github.com/IMGNRY/portfolio">IMGNRY/portfolio</a>
             </p>
         </footer>
