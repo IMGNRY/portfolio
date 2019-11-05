@@ -299,13 +299,6 @@ h1 {
         background-color: lightgray;
         position: relative;
         overflow: hidden;
-        .flickity {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            left: 0;
-            top: 0;
-        }
         .picture {
             position: absolute;
             width: 100%;
