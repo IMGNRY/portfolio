@@ -7,7 +7,8 @@
         "build": "vue-cli-service build"
     },
     "dependencies": {
-        "node-sass": "^8.0.0",
+        "@types/node": "^20.0.0",
+        "sass": "^1.62.1",
         "vue": "^2.5.13",
         "vue-class-component": "^6.0.0",
         "vue-cli": "^2.9.3",
@@ -19,8 +20,8 @@
         "@vue/cli-plugin-babel": "^3.0.0-beta.6",
         "@vue/cli-plugin-typescript": "^3.0.0-beta.6",
         "@vue/cli-service": "^3.0.0-beta.6",
-        "sass-loader": "^13.2.2",
-        "typescript": "^3.7.2",
+        "sass-loader": "^10.4.1",
+        "typescript": "^5.0.4",
         "vue-template-compiler": "^2.5.13"
     },
     "browserslist": [

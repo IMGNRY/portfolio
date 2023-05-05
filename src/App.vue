@@ -220,7 +220,7 @@ header {
   padding-top: 10vw;
   padding-bottom: 10vw;
   .picture {
-    background-image: url('/img/face-16.jpg');
+    background-image: url('/img/face-17.jpg');
     background-position: 50% calc(50% + 5px);
     background-size: cover;
     border-radius: 50%;
