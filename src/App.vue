@@ -11,6 +11,16 @@
         </h2>
       </div>
     </header>
+    <div class="intro">
+      <p>
+        I’m a full-stack developer with {{ yearsOfExperience() }} years of experience. Technological generalist that prefer to be involved all the
+        through the stack, from the database to the UI. Love to learn and experiment. Live in Stockholm, Sweden.
+      </p>
+
+      <p>If you’re interested in working with me: <a href="mailto:fille@imgnry.com">fille@imgnry.com</a></p>
+
+      <p>Below are some of the projects that I have been involved with.</p>
+    </div>
     <div class="cards">
       <div ref="cards" v-for="card in cards" :key="card.title" class="card">
         <v-intersect @enter="intersect(card)">
@@ -167,6 +177,11 @@ export default class App extends Vue {
   urlFromImageId(imageId: string) {
     return `//${location.host}/img/card_${imageId}.png`
   }
+  yearsOfExperience() {
+    const start = 1998
+    const end = new Date().getFullYear()
+    return end - start
+  }
 }
 </script>
 
@@ -263,8 +278,27 @@ h1 {
   font-size: 6em;
   font-weight: $weight-semi-bold;
 }
+.intro {
+  margin: 40px auto;
+  padding: 0 30px;
+  font-size: 24px;
+  @media (min-width: 568px) {
+    padding: 0;
+    font-size: 26px;
+    max-width: 850px;
+  }
+  line-height: 1.5;
+  p {
+    margin-bottom: 20px;
+  }
+  //   font-weight: 500;
+  .bold {
+    font-weight: $weight-bold;
+    border-bottom: 3px solid;
+  }
+}
 .cards {
-  margin-top: 40px;
+  margin-top: 70px;
 }
 .card {
   background-color: $white;
